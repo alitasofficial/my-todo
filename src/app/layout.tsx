@@ -2,7 +2,7 @@ import "@/styles/globals.css";
 
 import { Inter } from "next/font/google";
 
-import Providers from "@/components/providers";
+import AuthProvider from "@/components/providers/auth-provider";
 import { TRPCReactProvider } from "@/trpc/react";
 
 const inter = Inter({
@@ -16,16 +16,16 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
-  children,
-}: {
+interface RootLayoutProps {
   children: React.ReactNode;
-}) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
         <TRPCReactProvider>
-          <Providers session={null}>{children}</Providers>
+          <AuthProvider>{children}</AuthProvider>
         </TRPCReactProvider>
       </body>
     </html>
